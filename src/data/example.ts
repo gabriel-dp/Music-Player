@@ -1,5 +1,6 @@
 import { Lyrics, Music, MusicData } from "@/types/music";
 import { generateStanza, generateVerse } from "@/utils/musicUtils";
+import audio from "@/data/example.mp3";
 
 const data: MusicData = {
 	author: ["Padre Marcelo Rossi"],
@@ -96,9 +97,9 @@ const lyrics: Lyrics = [
 	CORPO(7, 0, 0, 0, 0),
 ];
 
-export const music: Music = {
+export const example: Music = {
 	data,
 	lyrics,
-	audio: "",
-	image: "",
+	audio,
+	image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWeOjZKhn5HzMYjUVM6VZopmx8ShhDqX-v_A&s",
 };
