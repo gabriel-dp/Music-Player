@@ -80,6 +80,10 @@ export const LyricsContainer = styled.div.attrs({
 	overflow-y: auto;
 	padding: 2rem;
 
+	* {
+		transition: none;
+	}
+
 	.current {
 		font-weight: bold;
 		color: blue;
