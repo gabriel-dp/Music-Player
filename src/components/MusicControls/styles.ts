@@ -29,6 +29,7 @@ export const ButtonsRow = styled.div`
 
 		.icon {
 			font-size: 1.25rem;
+			color: ${(props) => props.theme.text};
 		}
 	}
 
@@ -39,17 +40,28 @@ export const ButtonsRow = styled.div`
 	}
 
 	.text {
-		border: 1px solid #000;
+		border: 1px solid ${(props) => props.theme.text};
+		color: ${(props) => props.theme.text};
 		padding: 0.5rem 1rem;
+		transition: all 0.25s ease-in-out;
 
 		&:hover {
-			background-color: #000;
-			color: #fff;
+			background-color: ${(props) => props.theme.text};
+			color: ${(props) => props.theme.background};
+
+			.icon {
+				color: ${(props) => props.theme.background};
+			}
 		}
 
 		.icon {
 			font-size: 0.75rem;
 			margin-left: 0.5rem;
 		}
+	}
+
+	.disabled {
+		opacity: 0.33;
+		cursor: not-allowed;
 	}
 `;

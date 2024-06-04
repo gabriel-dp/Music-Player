@@ -4,11 +4,13 @@ import {
 	FaCirclePlay as Play,
 	FaBackwardStep as Previous,
 	FaForwardStep as Next,
-	FaRepeat as Loop,
-	FaRegHeart as Favorite,
 	FaAlignCenter as Lyrics,
 	FaX as Close,
+	FaMoon as Dark,
+	FaSun as Light,
 } from "react-icons/fa6";
+
+import { TbRepeat as LoopOn, TbRepeatOff as LoopOff } from "react-icons/tb";
 
 import { ButtonsContainer, ButtonsRow } from "./styles";
 
@@ -17,6 +19,11 @@ interface MusicControlsI {
 	togglePlaying: () => void;
 	isLyricsOpen: boolean;
 	setIsLyricsOpen: (value: React.SetStateAction<boolean>) => void;
+	reset: () => void;
+	loop: boolean;
+	toggleLoop: () => void;
+	darkMode: boolean;
+	toggleDarkMode: () => void;
 }
 
 export default function MusicControls(props: MusicControlsI) {
@@ -39,20 +46,20 @@ export default function MusicControls(props: MusicControlsI) {
 	return (
 		<ButtonsContainer>
 			<ButtonsRow>
-				<button>
-					<Favorite className="icon" />
+				<button onClick={props.toggleDarkMode}>
+					{props.darkMode ? <Dark className="icon" /> : <Light className="icon" />}
 				</button>
-				<button>
+				<button onClick={props.reset}>
 					<Previous className="icon" />
 				</button>
 				<button className="main" onClick={props.togglePlaying}>
 					{props.isPlaying ? <Pause className="icon" /> : <Play className="icon" />}
 				</button>
-				<button>
+				<button className="disabled">
 					<Next className="icon" />
 				</button>
-				<button>
-					<Loop className="icon" />
+				<button onClick={props.toggleLoop}>
+					{props.loop ? <LoopOn className="icon" /> : <LoopOff className="icon" />}
 				</button>
 			</ButtonsRow>
 			{showLyricsButton && (

@@ -4,18 +4,42 @@ import useMusicPlayer from "@/hooks/useMusicPlayer";
 import { isCurrentVerse } from "@/utils/lyricsUtils";
 import TimeSlider from "@/components/TimeSlider";
 import MusicImage from "@/components/MusicImage";
+import MusicControls from "@/components/MusicControls";
+import Header from "@/components/Header";
 import { example } from "@/data/example";
 
-import { Background, ControlsContainer, DataContainer, LyricsContainer, MusicPlayerContainer } from "./styles";
-import MusicControls from "@/components/MusicControls";
+import {
+	Background,
+	ControlsContainer,
+	DataContainer,
+	HeaderContainer,
+	LyricsContainer,
+	MusicPlayerContainer,
+} from "./styles";
 
-export default function Home() {
+interface HomeI {
+	darkMode: boolean;
+	toggleDarkMode: () => void;
+}
+
+export default function Home(props: HomeI) {
 	const [isLyricsOpen, setIsLyricsOpen] = useState(false);
-	const { music, ...controls } = useMusicPlayer(example);
+	const [loop, setLoop] = useState(false);
+	const { music, ...controls } = useMusicPlayer(example, loop);
+
+	function toggleLoop() {
+		setLoop((state) => !state);
+	}
+	function reset() {
+		controls.setTime(0);
+	}
 
 	return (
 		<Background>
 			<MusicPlayerContainer $isLyricsOpen={isLyricsOpen.toString()}>
+				<HeaderContainer>
+					<Header />
+				</HeaderContainer>
 				<DataContainer>
 					<MusicImage src={music?.image} alt="Album image" />
 					<div>
@@ -47,6 +71,11 @@ export default function Home() {
 						togglePlaying={controls.togglePlaying}
 						isLyricsOpen={isLyricsOpen}
 						setIsLyricsOpen={setIsLyricsOpen}
+						reset={reset}
+						toggleLoop={toggleLoop}
+						loop={loop}
+						darkMode={props.darkMode}
+						toggleDarkMode={props.toggleDarkMode}
 					/>
 				</ControlsContainer>
 			</MusicPlayerContainer>

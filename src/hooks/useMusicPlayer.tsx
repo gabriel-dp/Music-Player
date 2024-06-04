@@ -6,7 +6,7 @@ interface useMusicPlayerReturn {
 	music: Music | undefined;
 	isPlaying: boolean;
 	pause: () => void;
-	resume: () => void;
+	play: () => void;
 	togglePlaying: () => void;
 	setMusic: (music: Music) => void;
 	duration: number;
@@ -14,7 +14,7 @@ interface useMusicPlayerReturn {
 	setTime: (time: number) => void;
 }
 
-export default function useMusicPlayer(initialMusic?: Music): useMusicPlayerReturn {
+export default function useMusicPlayer(initialMusic: Music | undefined, loop: boolean): useMusicPlayerReturn {
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const [music, setMusic] = useState<Music | undefined>(initialMusic);
 
@@ -31,28 +31,36 @@ export default function useMusicPlayer(initialMusic?: Music): useMusicPlayerRetu
 	const pause = useCallback(() => {
 		audio.pause();
 	}, [audio]);
-	const resume = useCallback(() => {
+	const play = useCallback(() => {
 		audio.play();
 	}, [audio]);
-	const togglePlaying = () => (isPlaying ? pause() : resume());
+	const togglePlaying = () => (isPlaying ? pause() : play());
 
 	// Change current time
-	const setTime = (time: number) => {
-		audio.currentTime = time;
-		setCurrentTime(time);
-	};
+	const setTime = useCallback(
+		(time: number) => {
+			audio.currentTime = time;
+			setCurrentTime(time);
+		},
+		[audio]
+	);
 
 	// Handles the end of the audio
 	useEffect(() => {
 		function end() {
-			setIsPlaying(false);
+			if (loop) {
+				setTime(0);
+				play();
+			} else {
+				setIsPlaying(false);
+			}
 		}
 
 		audio.addEventListener("ended", end);
 		return () => {
 			audio.removeEventListener("ended", end);
 		};
-	}, [audio]);
+	}, [audio, loop, setTime, play]);
 
 	// Updates the current isPlaying state based on audio
 	useEffect(() => {
@@ -96,7 +104,7 @@ export default function useMusicPlayer(initialMusic?: Music): useMusicPlayerRetu
 		music,
 		isPlaying,
 		pause,
-		resume,
+		play,
 		togglePlaying,
 		setMusic,
 		duration,
