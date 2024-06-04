@@ -1,7 +1,7 @@
 import { useState, Fragment } from "react";
 
-import { Stanza, Verse } from "@/types/music";
 import useMusicPlayer from "@/hooks/useMusicPlayer";
+import { isCurrentVerse } from "@/utils/lyricsUtils";
 import TimeSlider from "@/components/TimeSlider";
 import MusicImage from "@/components/MusicImage";
 import { example } from "@/data/example";
@@ -11,13 +11,6 @@ import { Background, ControlsContainer, DataContainer, LyricsContainer, MusicPla
 export default function Home() {
 	const [isLyricsOpen, setIsLyricsOpen] = useState(false);
 	const { music, ...controls } = useMusicPlayer(example);
-
-	function isCurrentVerse(verse: Verse, nextVerse: Verse | undefined, nextStanza: Stanza | undefined): boolean {
-		if (controls.currentTime < verse.start) return false;
-		if (nextVerse && controls.currentTime < nextVerse.start) return true;
-		if (!nextVerse && nextStanza && controls.currentTime < nextStanza[0].start) return true;
-		return false;
-	}
 
 	return (
 		<Background>
@@ -36,8 +29,8 @@ export default function Home() {
 								<Fragment key={i}>
 									{stanza.map((verse, j) => (
 										<p
-											className={isCurrentVerse(verse, stanza[j + 1], music.lyrics[i + 1]) ? "current" : "normal"}
-											key={`${i}-${j}`}>
+											key={`${i}-${j}`}
+											className={isCurrentVerse(music.lyrics, controls.currentTime, j, i) ? "current" : "normal"}>
 											{verse.text}
 										</p>
 									))}
