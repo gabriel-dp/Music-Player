@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 
 import useMusicPlayer from "@/hooks/useMusicPlayer";
 import { isCurrentVerse } from "@/utils/lyricsUtils";
@@ -34,6 +34,19 @@ export default function Home(props: HomeI) {
 	function reset() {
 		controls.setTime(0);
 	}
+
+	// Print music lyrics in the terminal
+	useEffect(() => {
+		if (!music) return;
+
+		console.log("\n");
+		music.lyrics.forEach((stanza) => {
+			stanza.forEach((verse) => {
+				console.log(verse.text);
+			});
+			console.log("\n");
+		});
+	}, [music]);
 
 	return (
 		<Background>
