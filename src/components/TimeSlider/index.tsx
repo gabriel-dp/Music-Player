@@ -23,6 +23,7 @@ export default function TimeSlider(props: TimeSliderI) {
 				step={0.25}
 				value={checkNaN(props.currentTime / props.duration) * 100}
 				onChange={handleTimeChange}
+				aria-label="time-slider"
 			/>
 			<TimeContainer>
 				<p>{convertToTime(checkNaN(props.currentTime))}</p>

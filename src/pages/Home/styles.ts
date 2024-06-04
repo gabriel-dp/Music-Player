@@ -39,6 +39,11 @@ export const MusicPlayerContainer = styled.div<{ $isLyricsOpen: string }>`
 			padding: 1rem 0;
 			align-items: center;
 			min-height: 5rem;
+			text-align: ${(props) => (props.$isLyricsOpen == "true" ? "left" : "")};
+
+			.title {
+				font-size: ${(props) => (props.$isLyricsOpen == "true" ? "1.25rem" : "")};
+			}
 
 			.image {
 				width: ${(props) => (props.$isLyricsOpen == "true" ? "3rem" : "100%")};
@@ -74,11 +79,22 @@ export const DataContainer = styled.div.attrs({
 	padding-bottom: 1rem;
 	white-space: nowrap;
 	overflow: hidden;
+	text-align: center;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	gap: 1rem;
+
+	.text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+
+		* {
+			transition: all 0.625s ease-in-out;
+		}
+	}
 `;
 
 export const LyricsContainer = styled.div.attrs({

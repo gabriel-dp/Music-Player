@@ -46,19 +46,19 @@ export default function MusicControls(props: MusicControlsI) {
 	return (
 		<ButtonsContainer>
 			<ButtonsRow>
-				<button onClick={props.toggleDarkMode}>
+				<button onClick={props.toggleDarkMode} aria-label="toggle-theme">
 					{props.darkMode ? <Dark className="icon" /> : <Light className="icon" />}
 				</button>
-				<button onClick={props.reset}>
+				<button onClick={props.reset} aria-label="previous">
 					<Previous className="icon" />
 				</button>
-				<button className="main" onClick={props.togglePlaying}>
+				<button className="main" onClick={props.togglePlaying} aria-label="pause/play">
 					{props.isPlaying ? <Pause className="icon" /> : <Play className="icon" />}
 				</button>
-				<button className="disabled">
+				<button className="disabled" aria-label="next">
 					<Next className="icon" />
 				</button>
-				<button onClick={props.toggleLoop}>
+				<button onClick={props.toggleLoop} aria-label="loop">
 					{props.loop ? <LoopOn className="icon" /> : <LoopOff className="icon" />}
 				</button>
 			</ButtonsRow>

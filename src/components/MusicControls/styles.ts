@@ -7,7 +7,7 @@ export const ButtonsContainer = styled.div`
 
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: 1.5rem;
 `;
 
 export const ButtonsRow = styled.div`
@@ -50,6 +50,7 @@ export const ButtonsRow = styled.div`
 			color: ${(props) => props.theme.background};
 
 			.icon {
+				transition: all 0.25s ease-in-out;
 				color: ${(props) => props.theme.background};
 			}
 		}

@@ -24,12 +24,13 @@ interface HomeI {
 
 export default function Home(props: HomeI) {
 	const [isLyricsOpen, setIsLyricsOpen] = useState(false);
-	const [loop, setLoop] = useState(false);
+	const [loop, setLoop] = useState(true);
 	const { music, ...controls } = useMusicPlayer(example, loop);
 
 	function toggleLoop() {
 		setLoop((state) => !state);
 	}
+
 	function reset() {
 		controls.setTime(0);
 	}
@@ -42,9 +43,9 @@ export default function Home(props: HomeI) {
 				</HeaderContainer>
 				<DataContainer>
 					<MusicImage src={music?.image} alt="Album image" />
-					<div>
-						<h2>{music?.data.title}</h2>
-						<p>{music?.data.author.join(" | ")}</p>
+					<div className="text">
+						<h2 className="title">{music?.data.title}</h2>
+						<p className="author">{music?.data.author.join(" | ")}</p>
 					</div>
 				</DataContainer>
 				<LyricsContainer>
