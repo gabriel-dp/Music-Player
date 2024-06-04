@@ -46,7 +46,6 @@ export const MusicPlayerContainer = styled.div<{ $isLyricsOpen: string }>`
 		}
 
 		.lyrics {
-			transition: none;
 			height: ${(props) => (props.$isLyricsOpen == "true" ? 100 : 0)}%;
 			padding: ${(props) => (props.$isLyricsOpen == "true" ? "1.5rem" : 0)} 0;
 		}
