@@ -11,7 +11,6 @@ export const MusicPlayerContainer = styled.div<{ $isLyricsOpen: string }>`
 	width: min(100%, 75rem);
 	height: 100%;
 	margin: auto;
-	border: 1px solid blue;
 
 	display: grid;
 	grid-template-areas:
@@ -30,8 +29,13 @@ export const MusicPlayerContainer = styled.div<{ $isLyricsOpen: string }>`
 
 		.data {
 			flex-direction: ${(props) => (props.$isLyricsOpen == "true" ? "row" : "column")};
-			justify-content: flex-start;
+			justify-content: ${(props) => (props.$isLyricsOpen == "true" ? "flex-start" : "center")};
 			align-items: center;
+			min-height: 5rem;
+
+			.image {
+				width: ${(props) => (props.$isLyricsOpen == "true" ? "5rem" : "100%")};
+			}
 		}
 
 		.lyrics {
@@ -45,13 +49,11 @@ export const DataContainer = styled.div.attrs({
 })`
 	grid-area: data;
 
-	min-height: 5rem;
 	max-height: min-content;
 	flex: 1;
 	width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
-	border: 1px solid green;
 
 	display: flex;
 	flex-direction: column;
@@ -66,7 +68,6 @@ export const LyricsContainer = styled.div.attrs({
 
 	width: 100%;
 	height: 100%;
-	border: 1px solid red;
 `;
 
 export const ControlsContainer = styled.div.attrs({
@@ -76,5 +77,4 @@ export const ControlsContainer = styled.div.attrs({
 
 	width: 100%;
 	min-height: 7rem;
-	border: 1px solid yellow;
 `;
