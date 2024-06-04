@@ -30,16 +30,24 @@ export const MusicPlayerContainer = styled.div<{ $isLyricsOpen: string }>`
 		.data {
 			flex-direction: ${(props) => (props.$isLyricsOpen == "true" ? "row" : "column")};
 			justify-content: ${(props) => (props.$isLyricsOpen == "true" ? "flex-start" : "center")};
+			padding: 1rem 0;
 			align-items: center;
 			min-height: 5rem;
 
+			box-shadow: ${(props) => (props.$isLyricsOpen == "true" ? "#00000077 0 1rem 1rem -1.25rem;" : "none")};
+
+			& > * {
+				transition: none;
+			}
+
 			.image {
-				width: ${(props) => (props.$isLyricsOpen == "true" ? "5rem" : "100%")};
+				width: ${(props) => (props.$isLyricsOpen == "true" ? "3rem" : "100%")};
 			}
 		}
 
 		.lyrics {
 			height: ${(props) => (props.$isLyricsOpen == "true" ? 100 : 0)}%;
+			padding: ${(props) => (props.$isLyricsOpen == "true" ? "1.5rem" : 0)} 0;
 		}
 	}
 `;
@@ -52,6 +60,7 @@ export const DataContainer = styled.div.attrs({
 	max-height: min-content;
 	flex: 1;
 	width: 100%;
+	padding-bottom: 1rem;
 	white-space: nowrap;
 	overflow: hidden;
 
@@ -68,6 +77,16 @@ export const LyricsContainer = styled.div.attrs({
 
 	width: 100%;
 	height: 100%;
+	overflow-y: auto;
+	padding: 2rem;
+
+	.current {
+		font-weight: bold;
+		color: blue;
+	}
+
+	.normal {
+	}
 `;
 
 export const ControlsContainer = styled.div.attrs({
@@ -77,4 +96,6 @@ export const ControlsContainer = styled.div.attrs({
 
 	width: 100%;
 	min-height: 7rem;
+	padding: 1rem 0;
+	box-shadow: #00000077 0 -1rem 1rem -1.25rem;
 `;

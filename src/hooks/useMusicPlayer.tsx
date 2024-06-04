@@ -29,11 +29,9 @@ export default function useMusicPlayer(initialMusic?: Music): useMusicPlayerRetu
 
 	// Audio play/pause control
 	const pause = useCallback(() => {
-		setIsPlaying(false);
 		audio.pause();
 	}, [audio]);
 	const resume = useCallback(() => {
-		setIsPlaying(true);
 		audio.play();
 	}, [audio]);
 	const togglePlaying = () => (isPlaying ? pause() : resume());
@@ -56,16 +54,33 @@ export default function useMusicPlayer(initialMusic?: Music): useMusicPlayerRetu
 		};
 	}, [audio]);
 
-	// Updates the current time
+	// Updates the current isPlaying state based on audio
 	useEffect(() => {
-		if (!isPlaying) return;
+		function playing(state: boolean) {
+			setIsPlaying(state);
+		}
 
-		const interval = setInterval(() => {
+		audio.addEventListener("play", () => playing(true));
+		audio.addEventListener("pause", () => playing(false));
+		return () => {
+			audio.removeEventListener("play", () => playing(true));
+			audio.removeEventListener("pause", () => playing(false));
+		};
+	}, [audio]);
+
+	// Updates the current time based on audio
+	useEffect(() => {
+		function updateTime() {
 			setCurrentTime(audio.currentTime);
-		}, 250);
-		return () => clearInterval(interval);
-	}, [audio, isPlaying]);
+		}
 
+		audio.addEventListener("timeupdate", updateTime);
+		return () => {
+			audio.removeEventListener("timeupdate", updateTime);
+		};
+	}, [audio]);
+
+	// Set duration after audio metadata loads
 	useEffect(() => {
 		function updateDuration() {
 			setDuration(audio.duration);

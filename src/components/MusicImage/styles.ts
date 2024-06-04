@@ -7,7 +7,6 @@ export const ImageContainer = styled.div.attrs({
 	width: 100%;
 	max-width: 100vmin;
 	max-height: 100vmin;
-	transition: none;
 
 	display: flex;
 	align-items: center;
