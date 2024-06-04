@@ -31,7 +31,7 @@ export default function Home() {
 				</DataContainer>
 				<LyricsContainer></LyricsContainer>
 				<ControlsContainer>
-					<TimeSlider />
+					<TimeSlider currentTime={controls.currentTime} duration={controls.duration} setTime={controls.setTime} />
 					<button onClick={controls.togglePlaying}>{controls.isPlaying ? "Pause" : "Resume"}</button>
 					<button onClick={() => setIsLyricsOpen((state) => !state)}>{isLyricsOpen ? "Close" : "Open"}</button>
 				</ControlsContainer>
