@@ -39,7 +39,7 @@ export const MusicPlayerContainer = styled.div<{ $isLyricsOpen: string }>`
 			padding: 1rem 0;
 			align-items: center;
 			min-height: 5rem;
-			text-align: ${(props) => (props.$isLyricsOpen == "true" ? "left" : "")};
+			text-align: ${(props) => (props.$isLyricsOpen == "true" ? "left" : "center")};
 
 			.title {
 				font-size: ${(props) => (props.$isLyricsOpen == "true" ? "1.25rem" : "")};
@@ -79,7 +79,6 @@ export const DataContainer = styled.div.attrs({
 	padding-bottom: 1rem;
 	white-space: nowrap;
 	overflow: hidden;
-	text-align: center;
 
 	display: flex;
 	flex-direction: column;
