@@ -7,6 +7,7 @@ import MusicImage from "@/components/MusicImage";
 import { example } from "@/data/example";
 
 import { Background, ControlsContainer, DataContainer, LyricsContainer, MusicPlayerContainer } from "./styles";
+import MusicControls from "@/components/MusicControls";
 
 export default function Home() {
 	const [isLyricsOpen, setIsLyricsOpen] = useState(false);
@@ -41,8 +42,12 @@ export default function Home() {
 				</LyricsContainer>
 				<ControlsContainer>
 					<TimeSlider currentTime={controls.currentTime} duration={controls.duration} setTime={controls.setTime} />
-					<button onClick={controls.togglePlaying}>{controls.isPlaying ? "Pause" : "Resume"}</button>
-					<button onClick={() => setIsLyricsOpen((state) => !state)}>{isLyricsOpen ? "Close" : "Open"}</button>
+					<MusicControls
+						isPlaying={controls.isPlaying}
+						togglePlaying={controls.togglePlaying}
+						isLyricsOpen={isLyricsOpen}
+						setIsLyricsOpen={setIsLyricsOpen}
+					/>
 				</ControlsContainer>
 			</MusicPlayerContainer>
 		</Background>
