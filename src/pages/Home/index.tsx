@@ -1,5 +1,6 @@
 import { useState, Fragment, useEffect } from "react";
 
+import { AppConfigs, AppEditConfigs } from "@/App";
 import useMusicPlayer from "@/hooks/useMusicPlayer";
 import { isCurrentVerse } from "@/utils/lyricsUtils";
 import TimeSlider from "@/components/TimeSlider";
@@ -18,18 +19,13 @@ import {
 } from "./styles";
 
 interface HomeI {
-	darkMode: boolean;
-	toggleDarkMode: () => void;
+	configs: AppConfigs;
+	editConfigs: AppEditConfigs;
 }
 
 export default function Home(props: HomeI) {
 	const [isLyricsOpen, setIsLyricsOpen] = useState(false);
-	const [loop, setLoop] = useState(true);
-	const { music, ...controls } = useMusicPlayer(example, loop);
-
-	function toggleLoop() {
-		setLoop((state) => !state);
-	}
+	const { music, ...controls } = useMusicPlayer(example, props.configs.loop);
 
 	function reset() {
 		controls.setTime(0);
@@ -86,10 +82,10 @@ export default function Home(props: HomeI) {
 						isLyricsOpen={isLyricsOpen}
 						setIsLyricsOpen={setIsLyricsOpen}
 						reset={reset}
-						toggleLoop={toggleLoop}
-						loop={loop}
-						darkMode={props.darkMode}
-						toggleDarkMode={props.toggleDarkMode}
+						loop={props.configs.loop}
+						toggleLoop={props.editConfigs.toggleLoop}
+						darkMode={props.configs.darkMode}
+						toggleDarkMode={props.editConfigs.toggleDarkMode}
 					/>
 				</ControlsContainer>
 			</MusicPlayerContainer>
