@@ -91,7 +91,7 @@ export const DataContainer = styled.div.attrs({
 		gap: 0.25rem;
 
 		* {
-			transition: all 0.625s ease-in-out;
+			transition: all 0.5s ease-in-out, color 0s ease;
 		}
 	}
 `;
