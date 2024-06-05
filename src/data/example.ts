@@ -2,7 +2,7 @@ import { Lyrics, Music, MusicData, Stanza } from "@/types/music";
 import { generateStanza, generateVerse } from "@/utils/lyricsUtils";
 
 import audio from "./example.mp3";
-import image from "./example.jpeg";
+import image from "./example.png";
 
 const data: MusicData = {
 	author: ["Padre Marcelo Rossi"],
