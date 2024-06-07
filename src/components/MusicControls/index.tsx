@@ -9,12 +9,12 @@ import {
 	FaMoon as Dark,
 	FaSun as Light,
 } from "react-icons/fa6";
-
 import { TbRepeat as LoopOn, TbRepeatOff as LoopOff } from "react-icons/tb";
 
 import { ButtonsContainer, ButtonsRow } from "./styles";
 
 interface MusicControlsI {
+	currentTime: number;
 	isPlaying: boolean;
 	togglePlaying: () => void;
 	isLyricsOpen: boolean;
@@ -49,7 +49,10 @@ export default function MusicControls(props: MusicControlsI) {
 				<button onClick={props.toggleDarkMode} aria-label="toggle-theme">
 					{props.darkMode ? <Dark className="icon" /> : <Light className="icon" />}
 				</button>
-				<button onClick={props.reset} aria-label="previous">
+				<button
+					className={props.currentTime == 0 ? "disabled" : ""}
+					onClick={() => props.currentTime > 0 && props.reset()}
+					aria-label="previous">
 					<Previous className="icon" />
 				</button>
 				<button className="main" onClick={props.togglePlaying} aria-label="pause/play">

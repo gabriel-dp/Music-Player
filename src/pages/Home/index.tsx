@@ -77,6 +77,7 @@ export default function Home(props: HomeI) {
 				<ControlsContainer>
 					<TimeSlider currentTime={controls.currentTime} duration={controls.duration} setTime={controls.setTime} />
 					<MusicControls
+						currentTime={controls.currentTime}
 						isPlaying={controls.isPlaying}
 						togglePlaying={controls.togglePlaying}
 						isLyricsOpen={isLyricsOpen}
