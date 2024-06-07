@@ -27,7 +27,7 @@
 
 ## 💡 Motivation
 
-The main idea of the project is to display the entire lyrics of the music "Erguei As Mãos" from Pr. Marcelo Rossi.
+The main idea of the project is to display the entire lyrics of the music "Erguei As Mãos" from Padre Marcelo Rossi.
 
 It was created as part of the "Acelera ZG" selection process.
 
